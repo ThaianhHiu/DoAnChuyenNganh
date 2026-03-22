@@ -22,9 +22,10 @@ def run_benchmark(
     sa_cooling_rate: float,
     bb_timeout_seconds: float,
     seed: int,
+    graph_preview_max_vertices: int = 10,
 ) -> dict:
     results = []
-    include_graph_structure = graph.num_vertices < 10
+    include_graph_structure = graph.num_vertices <= graph_preview_max_vertices
 
     start = time.perf_counter()
     greedy_result = greedy_coloring(graph)
@@ -70,6 +71,7 @@ def run_benchmark(
             "num_vertices": graph.num_vertices,
             "num_edges": graph.num_edges,
             "edges": graph.edges if include_graph_structure else None,
+            "preview_max_vertices": graph_preview_max_vertices,
         },
         "results": results,
     }

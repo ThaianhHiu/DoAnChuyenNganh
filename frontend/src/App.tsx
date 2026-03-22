@@ -63,7 +63,12 @@ function SmallGraphPreview({
   graph,
   results,
 }: {
-  graph: { num_vertices: number; num_edges: number; edges?: Array<[number, number]> | null };
+  graph: {
+    num_vertices: number;
+    num_edges: number;
+    edges?: Array<[number, number]> | null;
+    preview_max_vertices?: number;
+  };
   results: AlgoResult[];
 }) {
   const [activeAlgorithm, setActiveAlgorithm] = useState<string>(results[0]?.algorithm ?? "");
@@ -96,7 +101,7 @@ function SmallGraphPreview({
     });
   }, [graph.num_vertices]);
 
-  if (graph.num_vertices >= 10 || !graph.edges) {
+  if (!graph.edges) {
     return null;
   }
 
@@ -105,7 +110,7 @@ function SmallGraphPreview({
       <div className="panel-headline">
         <h2>Mô phỏng tô màu đồ thị tự động</h2>
         <p>
-          Tự hiển thị khi số đỉnh nhỏ hơn 10. Bạn có thể đổi thuật toán để xem cách phân màu
+          Tự hiển thị khi số đỉnh nhỏ hơn hoặc bằng ngưỡng đã chọn. Bạn có thể đổi thuật toán để xem cách phân màu
           khác nhau.
         </p>
       </div>
@@ -174,6 +179,10 @@ function SmallGraphPreview({
               <strong>{activeResult.num_colors}</strong>
             </div>
             <div>
+              <span>Ngưỡng hiển thị</span>
+              <strong>{graph.preview_max_vertices ?? 10}</strong>
+            </div>
+            <div>
               <span>Đỉnh / Cạnh</span>
               <strong>
                 {graph.num_vertices} / {graph.num_edges}
@@ -198,6 +207,7 @@ export default function App() {
   const [saCoolingRate, setSaCoolingRate] = useState<number>(0.9995);
   const [bbTimeout, setBbTimeout] = useState<number>(20);
   const [seed, setSeed] = useState<number>(42);
+  const [graphPreviewThreshold, setGraphPreviewThreshold] = useState<number>(10);
 
   const [results, setResults] = useState<AlgoResult[]>([]);
   const [graphInfo, setGraphInfo] = useState<{
@@ -270,6 +280,7 @@ export default function App() {
         sa_cooling_rate: saCoolingRate,
         bb_timeout_seconds: bbTimeout,
         seed,
+        graph_preview_max_vertices: graphPreviewThreshold,
       });
 
       setResults(response.results);
@@ -332,7 +343,15 @@ export default function App() {
 
           <label className="input-field">
             Upload file .col:
-            <input type="file" accept=".col" onChange={(e) => handleUpload(e.target.files?.[0] ?? null)} />
+            <input
+              type="file"
+              accept=".col"
+              onChange={async (e) => {
+                const file = e.target.files?.[0] ?? null;
+                await handleUpload(file);
+                e.target.value = "";
+              }}
+            />
           </label>
 
           <label className="input-field">
@@ -384,6 +403,18 @@ export default function App() {
           <label className="input-field">
             Seed:
             <input type="number" value={seed} onChange={(e) => setSeed(Number(e.target.value))} />
+          </label>
+
+          <label className="input-field">
+            Ngưỡng hiển thị đồ thị (đỉnh):
+            <input
+              type="number"
+              min={1}
+              max={200}
+              step={1}
+              value={graphPreviewThreshold}
+              onChange={(e) => setGraphPreviewThreshold(Number(e.target.value))}
+            />
           </label>
         </div>
 

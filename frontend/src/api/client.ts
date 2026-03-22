@@ -23,6 +23,7 @@ export type ComparisonResponse = {
     num_vertices: number;
     num_edges: number;
     edges?: Array<[number, number]> | null;
+    preview_max_vertices?: number;
   };
   results: AlgoResult[];
 };
@@ -35,10 +36,13 @@ export type RunPayload = {
   sa_cooling_rate: number;
   bb_timeout_seconds: number;
   seed: number;
+  graph_preview_max_vertices: number;
 };
 
 export async function getDatasets(): Promise<Dataset[]> {
-  const res = await fetch(`${API_BASE}/datasets`);
+  const res = await fetch(`${API_BASE}/datasets`, {
+    cache: "no-store",
+  });
   if (!res.ok) {
     throw new Error("Failed to load datasets");
   }

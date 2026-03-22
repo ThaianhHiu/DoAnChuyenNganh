@@ -32,6 +32,7 @@ class RunComparisonRequest(BaseModel):
     sa_cooling_rate: float = Field(default=0.9995, gt=0.9, lt=1.0)
     bb_timeout_seconds: float = Field(default=20.0, gt=0.5, le=300)
     seed: int = Field(default=42, ge=0)
+    graph_preview_max_vertices: int = Field(default=10, ge=1, le=200)
 
     @model_validator(mode="after")
     def check_data_source(self) -> "RunComparisonRequest":
@@ -109,6 +110,7 @@ def run_comparison(payload: RunComparisonRequest) -> dict:
         sa_cooling_rate=payload.sa_cooling_rate,
         bb_timeout_seconds=payload.bb_timeout_seconds,
         seed=payload.seed,
+        graph_preview_max_vertices=payload.graph_preview_max_vertices,
     )
 
     return {

@@ -1,0 +1,29 @@
+c graph 10 nodes - chromatic number 4
+p edge 10 18
+
+c --- K4 (bat buoc 4 mau) ---
+e 1 2
+e 1 3
+e 1 4
+e 2 3
+e 2 4
+e 3 4
+
+c --- cac dinh con lai ---
+e 5 1
+e 5 2
+
+e 6 2
+e 6 3
+
+e 7 3
+e 7 4
+
+e 8 1
+e 8 4
+
+e 9 1
+e 9 3
+
+e 10 2
+e 10 4
