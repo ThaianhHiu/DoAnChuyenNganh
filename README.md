@@ -76,6 +76,19 @@ Mở trình duyệt tại:
 
 - <http://127.0.0.1:5173>
 
+## Cấu hình API khi deploy web
+
+Frontend đọc URL backend từ biến môi trường Vite:
+
+- `VITE_API_BASE_URL`
+
+Ví dụ:
+
+- Local: `VITE_API_BASE_URL=http://127.0.0.1:8000`
+- Production: `VITE_API_BASE_URL=https://your-backend.onrender.com`
+
+Với Vercel, thêm biến này trong Project Settings -> Environment Variables rồi redeploy.
+
 ## Input DIMACS
 
 Định dạng `.col`:
