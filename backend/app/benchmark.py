@@ -66,6 +66,17 @@ def run_benchmark(
         }
     )
 
+    # If BnB proved optimality, any other valid zero-conflict result with the same
+    # color count is also proven optimal for this specific input.
+    bnb_row = next((row for row in results if row["algorithm"] == "Branch and Bound"), None)
+    if bnb_row and bnb_row.get("is_optimal"):
+        optimal_k = bnb_row["num_colors"]
+        for row in results:
+            if row["algorithm"] == "Branch and Bound":
+                continue
+            if row["is_valid"] and row["conflicts"] == 0 and row["num_colors"] == optimal_k:
+                row["is_optimal"] = True
+
     return {
         "graph": {
             "num_vertices": graph.num_vertices,
