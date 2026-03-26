@@ -23,16 +23,16 @@ export default function ResultTable({ results }: Props) {
           <tbody>
             {results.map((row) => (
               <tr key={row.algorithm}>
-                <td>{row.algorithm}</td>
-                <td>{row.num_colors}</td>
-                <td>{row.conflicts}</td>
-                <td>{row.runtime_ms.toFixed(3)}</td>
-                <td>
+                <td data-label="Thuật toán">{row.algorithm}</td>
+                <td data-label="Số màu">{row.num_colors}</td>
+                <td data-label="Xung đột">{row.conflicts}</td>
+                <td data-label="Thời gian (ms)">{row.runtime_ms.toFixed(3)}</td>
+                <td data-label="Hợp lệ">
                   <span className={`pill ${row.is_valid ? "pill-success" : "pill-danger"}`}>
                     {row.is_valid ? "Có" : "Không"}
                   </span>
                 </td>
-                <td>
+                <td data-label="Tối ưu">
                   <span
                     className={`pill ${
                       row.is_optimal ? "pill-success" : row.timed_out ? "pill-warn" : "pill-neutral"

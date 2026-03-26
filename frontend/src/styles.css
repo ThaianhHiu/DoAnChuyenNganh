@@ -40,7 +40,7 @@ body {
   display: grid;
   gap: 22px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .bg-orb {
@@ -608,6 +608,59 @@ button:disabled {
 
   .graph-canvas {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .result-table-wrap {
+    overflow-x: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .result-table {
+    min-width: 0;
+    white-space: normal;
+    border: 0;
+    background: transparent;
+  }
+
+  .result-table thead {
+    display: none;
+  }
+
+  .result-table tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .result-table tbody tr {
+    display: block;
+    border: 1px solid #dbe6df;
+    border-radius: 12px;
+    background: #fffdf9;
+    padding: 8px 10px;
+  }
+
+  .result-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px dashed #e3ebe5;
+    padding: 8px 0;
+    text-align: right;
+  }
+
+  .result-table tbody td:last-child {
+    border-bottom: 0;
+  }
+
+  .result-table tbody td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-weight: 600;
+    text-align: left;
   }
 }
 
