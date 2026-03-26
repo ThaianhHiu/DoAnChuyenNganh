@@ -690,6 +690,11 @@ button:disabled {
     animation: none !important;
   }
 
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   * {
     transition-duration: 0.01ms !important;
   }
