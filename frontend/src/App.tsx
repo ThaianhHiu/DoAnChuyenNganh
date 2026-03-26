@@ -300,7 +300,6 @@ export default function App() {
 
       <header className="hero reveal" style={{ ["--delay" as string]: "0ms" }}>
         <div className="hero-copy">
-          <p className="hero-eyebrow">ĐỒ ÁN THUẬT TOÁN</p>
           <div className="signature-frame" aria-label="Thông tin đồ án chuyên ngành">
             <span className="signature-kicker">Đồ án chuyên ngành</span>
             <strong>Lê Sinh Thái 3122410379</strong>
