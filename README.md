@@ -89,6 +89,14 @@ Ví dụ:
 
 Với Vercel, thêm biến này trong Project Settings -> Environment Variables rồi redeploy.
 
+## Lưu ý deploy Backend trên Render
+
+Render có thể tự chọn Python rất mới (ví dụ 3.14), trong khi một số dependency như `pydantic-core==2.27.1` chưa có wheel tương thích. Khi đó build sẽ thất bại do cố compile Rust.
+
+Project đã thêm sẵn file `backend/runtime.txt` với nội dung `python-3.12.8` để cố định phiên bản Python ổn định cho Render.
+
+Nếu service đã tạo trước đó, chỉ cần push commit mới rồi redeploy là Render sẽ dùng phiên bản trong runtime.txt.
+
 ## Input DIMACS
 
 Định dạng `.col`:
