@@ -300,7 +300,7 @@ export default function App() {
 
       <header className="hero reveal" style={{ ["--delay" as string]: "0ms" }}>
         <div className="hero-copy">
-          <p className="hero-eyebrow">ĐỒ ÁN THUẬT TOÁN</p>
+          <p className="hero-eyebrow">ĐỒ ÁN CHUYÊN NGÀNH _ LÊ SINH THÁI _ 3122410379 </p>
           <h1>So sánh Nhánh Cận, Tham Lam, Simulated Annealing</h1>
           <p>
             Benchmark trên DIMACS Graph Coloring: đo số màu, thời gian chạy và mức độ hợp lệ của
