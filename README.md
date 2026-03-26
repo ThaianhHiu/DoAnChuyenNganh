@@ -93,9 +93,11 @@ Với Vercel, thêm biến này trong Project Settings -> Environment Variables 
 
 Render có thể tự chọn Python rất mới (ví dụ 3.14), trong khi một số dependency như `pydantic-core==2.27.1` chưa có wheel tương thích. Khi đó build sẽ thất bại do cố compile Rust.
 
-Project đã thêm sẵn file `backend/runtime.txt` với nội dung `python-3.12.8` để cố định phiên bản Python ổn định cho Render.
+Project đã thêm sẵn file `.python-version` (ở root repo và trong `backend/`) với nội dung `3.12.8` để cố định phiên bản Python ổn định cho Render.
 
-Nếu service đã tạo trước đó, chỉ cần push commit mới rồi redeploy là Render sẽ dùng phiên bản trong runtime.txt.
+Bạn cũng có thể đặt biến môi trường `PYTHON_VERSION=3.12.8` trong Render (cách này có độ ưu tiên cao nhất).
+
+Nếu service đã tạo trước đó, chỉ cần push commit mới rồi redeploy; an toàn nhất là đặt thêm `PYTHON_VERSION=3.12.8` trong Render trước khi deploy.
 
 ## Input DIMACS
 
