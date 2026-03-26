@@ -23,6 +23,12 @@ body,
   min-height: 100%;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
@@ -40,7 +46,7 @@ body {
   display: grid;
   gap: 22px;
   position: relative;
-  overflow: visible;
+  overflow-x: clip;
 }
 
 .bg-orb {
@@ -125,7 +131,6 @@ body {
   padding: 11px 12px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.13));
   border: 1px solid rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(2px);
   display: grid;
   gap: 4px;
 }
@@ -556,6 +561,10 @@ button:disabled {
     border-radius: 18px;
   }
 
+  .bg-orb {
+    display: none;
+  }
+
   .panel {
     padding: 16px;
   }
@@ -609,6 +618,16 @@ button:disabled {
   .graph-canvas {
     max-width: 100%;
   }
+
+  .graph-node {
+    filter: none;
+  }
+
+  .panel,
+  .hero,
+  button {
+    box-shadow: 0 8px 16px rgba(38, 54, 44, 0.1);
+  }
 }
 
 @media (max-width: 520px) {
@@ -661,6 +680,18 @@ button:disabled {
     color: var(--muted);
     font-weight: 600;
     text-align: left;
+  }
+}
+
+@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+  .reveal,
+  .chart-bar,
+  .bg-orb {
+    animation: none !important;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
   }
 }
 
