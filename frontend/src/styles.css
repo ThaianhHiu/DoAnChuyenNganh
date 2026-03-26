@@ -31,7 +31,7 @@ body {
 
 body {
   margin: 0;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Be Vietnam Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background:
     radial-gradient(circle at 15% 12%, #fffaf0 0%, transparent 34%),
     radial-gradient(circle at 88% 18%, #edf9e8 0%, transparent 32%),
@@ -142,7 +142,7 @@ body {
 }
 
 .signature-frame strong {
-  font-family: "Syne", sans-serif;
+  font-family: "Sora", "Be Vietnam Pro", "Segoe UI", Roboto, sans-serif;
   letter-spacing: 0.02em;
   font-size: 1rem;
 }
@@ -159,7 +159,7 @@ body {
   margin: 0;
   font-size: clamp(1.35rem, 4.2vw, 2.4rem);
   line-height: 1.16;
-  font-family: "Syne", sans-serif;
+  font-family: "Sora", "Be Vietnam Pro", "Segoe UI", Roboto, sans-serif;
 }
 
 .hero p {
@@ -212,7 +212,7 @@ body {
 
 .panel h2 {
   margin: 0;
-  font-family: "Syne", sans-serif;
+  font-family: "Sora", "Be Vietnam Pro", "Segoe UI", Roboto, sans-serif;
 }
 
 .panel-headline p {
@@ -406,7 +406,7 @@ button:disabled {
 }
 
 .graph-meta strong {
-  font-family: "Syne", sans-serif;
+  font-family: "Sora", "Be Vietnam Pro", "Segoe UI", Roboto, sans-serif;
   font-size: 1.05rem;
 }
 
