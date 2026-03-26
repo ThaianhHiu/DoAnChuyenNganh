@@ -98,6 +98,55 @@ body {
   gap: 8px;
 }
 
+.signature-frame {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 14px;
+  padding: 10px 14px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.signature-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #f8ff00, #00e5ff, #ff5f6d, #ffc371, #4facfe, #f8ff00);
+  background-size: 250% 250%;
+  animation: border-flow 7s linear infinite;
+}
+
+.signature-frame::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 12px;
+  background: rgba(7, 44, 33, 0.84);
+  z-index: -1;
+}
+
+.signature-frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+.signature-kicker {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.86;
+  margin-bottom: 2px;
+}
+
+.signature-frame strong {
+  font-family: "Syne", sans-serif;
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+}
+
 .hero-eyebrow {
   margin: 0;
   letter-spacing: 0.2em;
@@ -540,6 +589,15 @@ button:disabled {
   }
 }
 
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -559,6 +617,10 @@ button:disabled {
   .hero {
     padding: 20px;
     border-radius: 18px;
+  }
+
+  .signature-frame {
+    width: 100%;
   }
 
   .bg-orb {
