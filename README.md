@@ -119,15 +119,6 @@ Bạn có thể tải các file benchmark từ:
 
 Sau đó upload file `.col` trên giao diện, hoặc copy vào `backend/data/dimacs`.
 
-## Gợi ý để làm báo cáo đồ án
-
-1. Mô tả mô hình bài toán Graph Coloring và giá trị ứng dụng.
-2. Phân tích nguyên lý của 3 thuật toán.
-3. Trình bày thiết kế hệ thống FE/BE.
-4. Chọn 5-10 bộ dữ liệu DIMACS để benchmark.
-5. So sánh kết quả theo bảng và biểu đồ.
-6. Đánh giá trade-off giữa chất lượng nghiệm và tốc độ.
-
 ## Kiểm tra nhanh đã thành công
 
 - Frontend build thành công (`npm run build`)
