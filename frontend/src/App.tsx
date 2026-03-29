@@ -8,6 +8,55 @@ import {
 } from "./api/client";
 import ResultTable from "./components/ResultTable";
 
+const DATASETS_CACHE_KEY = "graph-coloring:datasets:v1";
+
+function loadCachedDatasets(): Dataset[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const raw = window.localStorage.getItem(DATASETS_CACHE_KEY);
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed.filter((item): item is Dataset => {
+      if (!item || typeof item !== "object") {
+        return false;
+      }
+
+      const candidate = item as Partial<Dataset>;
+      return (
+        typeof candidate.name === "string" &&
+        typeof candidate.num_vertices === "number" &&
+        typeof candidate.num_edges === "number"
+      );
+    });
+  } catch {
+    return [];
+  }
+}
+
+function saveCachedDatasets(datasets: Dataset[]): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(DATASETS_CACHE_KEY, JSON.stringify(datasets));
+  } catch {
+    // Ignore quota/storage errors because cache is best-effort only.
+  }
+}
+
+const INITIAL_CACHED_DATASETS = loadCachedDatasets();
+
 const GRAPH_COLOR_PALETTE = [
   "#2a9d8f",
   "#f4a261",
@@ -198,8 +247,8 @@ function SmallGraphPreview({
 }
 
 export default function App() {
-  const [datasets, setDatasets] = useState<Dataset[]>([]);
-  const [selectedDataset, setSelectedDataset] = useState<string>("");
+  const [datasets, setDatasets] = useState<Dataset[]>(() => INITIAL_CACHED_DATASETS);
+  const [selectedDataset, setSelectedDataset] = useState<string>(() => INITIAL_CACHED_DATASETS[0]?.name ?? "");
   const [inlineInput, setInlineInput] = useState<string>("");
 
   const [saIterations, setSaIterations] = useState<number>(20000);
@@ -240,6 +289,7 @@ export default function App() {
     try {
       const data = await getDatasets();
       setDatasets(data);
+      saveCachedDatasets(data);
       if (!selectedDataset && data.length > 0) {
         setSelectedDataset(data[0].name);
       }

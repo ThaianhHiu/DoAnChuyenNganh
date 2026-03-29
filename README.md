@@ -132,3 +132,45 @@ Sau đó upload file `.col` trên giao diện, hoặc copy vào `backend/data/di
 
 - Frontend build thành công (`npm run build`)
 - Backend compile thành công (`python -m compileall app`)
+
+## PHỤ LỤC
+
+### Phụ lục A - Mã nguồn
+
+Mã nguồn của đề tài được lưu trữ tại:
+
+- <https://github.com/ThaianhHiu/DoAnChuyenNganh>
+
+Dự án bao gồm hai phần chính:
+
+- Backend: xây dựng bằng Python (FastAPI)
+- Frontend: xây dựng bằng React
+
+### Phụ lục B - Dữ liệu DIMACS
+
+Ví dụ file dữ liệu:
+
+```text
+c Sample graph
+p edge 5 4
+e 1 2
+e 1 3
+e 2 3
+e 3 4
+```
+
+### Phụ lục C - Kết quả thực nghiệm
+
+Ví dụ kết quả:
+
+- Greedy: num_colors = 4, runtime = 1.2 ms
+- Branch and Bound: num_colors = 3, runtime = 150 ms
+- Simulated Annealing: num_colors = 3, runtime = 80 ms
+
+### Phụ lục D - Hướng dẫn sử dụng
+
+```powershell
+cd backend
+python -m pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
