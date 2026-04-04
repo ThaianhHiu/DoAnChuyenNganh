@@ -72,9 +72,9 @@ def _anneal_for_k(
 
 def simulated_annealing_coloring(
     graph: Graph,
-    iterations: int = 20000,
-    initial_temperature: float = 4.0,
-    cooling_rate: float = 0.9995,
+    iterations: int = 40000,
+    initial_temperature: float = 10.0,
+    cooling_rate: float = 0.96,
     seed: int = 42,
 ) -> dict:
     rng = random.Random(seed)
