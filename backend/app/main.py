@@ -29,9 +29,9 @@ app.add_middleware(
 class RunComparisonRequest(BaseModel):
     dataset_name: str | None = None
     dimacs_content: str | None = None
-    sa_iterations: int = Field(default=20000, ge=500, le=500000)
-    sa_initial_temperature: float = Field(default=4.0, gt=0)
-    sa_cooling_rate: float = Field(default=0.9995, gt=0.9, lt=1.0)
+    sa_iterations: int = Field(default=40000, ge=500, le=500000)
+    sa_initial_temperature: float = Field(default=10.0, gt=0)
+    sa_cooling_rate: float = Field(default=0.96, gt=0.9, lt=1.0)
     bb_timeout_seconds: float = Field(default=20.0, gt=0.5, le=300)
     seed: int = Field(default=42, ge=0)
     graph_preview_max_vertices: int = Field(default=10, ge=1, le=200)
@@ -147,6 +147,19 @@ async def upload_dimacs(file: UploadFile = File(...)) -> dict:
             "num_vertices": graph.num_vertices,
             "num_edges": graph.num_edges,
         },
+    }
+
+
+@app.get("/defaults")
+def get_defaults() -> dict:
+    """Return default algorithm parameters"""
+    return {
+        "sa_iterations": 40000,
+        "sa_initial_temperature": 10.0,
+        "sa_cooling_rate": 0.96,
+        "bb_timeout_seconds": 20.0,
+        "seed": 42,
+        "graph_preview_max_vertices": 10,
     }
 
 

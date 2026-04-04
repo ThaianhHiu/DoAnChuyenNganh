@@ -39,6 +39,15 @@ export type RunPayload = {
   graph_preview_max_vertices: number;
 };
 
+export type Defaults = {
+  sa_iterations: number;
+  sa_initial_temperature: number;
+  sa_cooling_rate: number;
+  bb_timeout_seconds: number;
+  seed: number;
+  graph_preview_max_vertices: number;
+};
+
 export async function getDatasets(): Promise<Dataset[]> {
   const res = await fetch(`${API_BASE}/datasets`, {
     cache: "no-store",
@@ -48,6 +57,16 @@ export async function getDatasets(): Promise<Dataset[]> {
   }
   const data = (await res.json()) as { datasets: Dataset[] };
   return data.datasets;
+}
+
+export async function getDefaults(): Promise<Defaults> {
+  const res = await fetch(`${API_BASE}/defaults`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to load defaults");
+  }
+  return (await res.json()) as Defaults;
 }
 
 export async function uploadDimacs(file: File): Promise<void> {

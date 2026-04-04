@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import {
   AlgoResult,
   Dataset,
+  Defaults,
   getDatasets,
+  getDefaults,
   runComparison,
   uploadDimacs,
 } from "./api/client";
@@ -251,9 +253,9 @@ export default function App() {
   const [selectedDataset, setSelectedDataset] = useState<string>(() => INITIAL_CACHED_DATASETS[0]?.name ?? "");
   const [inlineInput, setInlineInput] = useState<string>("");
 
-  const [saIterations, setSaIterations] = useState<number>(20000);
-  const [saInitialTemp, setSaInitialTemp] = useState<number>(4.0);
-  const [saCoolingRate, setSaCoolingRate] = useState<number>(0.9995);
+  const [saIterations, setSaIterations] = useState<number>(40000);
+  const [saInitialTemp, setSaInitialTemp] = useState<number>(10.0);
+  const [saCoolingRate, setSaCoolingRate] = useState<number>(0.96);
   const [bbTimeout, setBbTimeout] = useState<number>(20);
   const [seed, setSeed] = useState<number>(42);
   const [graphPreviewThreshold, setGraphPreviewThreshold] = useState<number>(10);
@@ -268,6 +270,24 @@ export default function App() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    refreshDatasets();
+    async function loadDefaults() {
+      try {
+        const defaults = await getDefaults();
+        setSaIterations(defaults.sa_iterations);
+        setSaInitialTemp(defaults.sa_initial_temperature);
+        setSaCoolingRate(defaults.sa_cooling_rate);
+        setBbTimeout(defaults.bb_timeout_seconds);
+        setSeed(defaults.seed);
+        setGraphPreviewThreshold(defaults.graph_preview_max_vertices);
+      } catch {
+        // Keep hardcoded defaults if API fails
+      }
+    }
+    loadDefaults();
+  }, []);
 
   const insights = useMemo(() => {
     if (results.length === 0) {
@@ -297,10 +317,6 @@ export default function App() {
       setError((err as Error).message);
     }
   }
-
-  useEffect(() => {
-    refreshDatasets();
-  }, []);
 
   async function handleUpload(file: File | null) {
     if (!file) {
