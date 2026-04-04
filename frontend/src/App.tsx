@@ -256,7 +256,6 @@ export default function App() {
   const [saIterations, setSaIterations] = useState<number>(40000);
   const [saInitialTemp, setSaInitialTemp] = useState<number>(10.0);
   const [saCoolingRate, setSaCoolingRate] = useState<number>(0.96);
-  const [saMinTemp, setSaMinTemp] = useState<number>(0.01);
   const [bbTimeout, setBbTimeout] = useState<number>(20);
   const [seed, setSeed] = useState<number>(42);
   const [graphPreviewThreshold, setGraphPreviewThreshold] = useState<number>(10);
@@ -280,7 +279,6 @@ export default function App() {
         setSaIterations(defaults.sa_iterations);
         setSaInitialTemp(defaults.sa_initial_temperature);
         setSaCoolingRate(defaults.sa_cooling_rate);
-        setSaMinTemp(defaults.sa_min_temperature);
         setBbTimeout(defaults.bb_timeout_seconds);
         setSeed(defaults.seed);
         setGraphPreviewThreshold(defaults.graph_preview_max_vertices);
@@ -346,7 +344,6 @@ export default function App() {
         sa_iterations: saIterations,
         sa_initial_temperature: saInitialTemp,
         sa_cooling_rate: saCoolingRate,
-        sa_min_temperature: saMinTemp,
         bb_timeout_seconds: bbTimeout,
         seed,
         graph_preview_max_vertices: graphPreviewThreshold,
@@ -457,17 +454,6 @@ export default function App() {
               step={0.0001}
               value={saCoolingRate}
               onChange={(e) => setSaCoolingRate(Number(e.target.value))}
-            />
-          </label>
-
-          <label className="input-field">
-            SA nhiệt độ tối thiểu:
-            <input
-              type="number"
-              min={0.0001}
-              step={0.01}
-              value={saMinTemp}
-              onChange={(e) => setSaMinTemp(Number(e.target.value))}
             />
           </label>
 
