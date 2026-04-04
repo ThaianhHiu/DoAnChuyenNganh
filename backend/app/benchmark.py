@@ -20,6 +20,7 @@ def run_benchmark(
     sa_iterations: int,
     sa_initial_temperature: float,
     sa_cooling_rate: float,
+    sa_min_temperature: float,
     bb_timeout_seconds: float,
     seed: int,
     graph_preview_max_vertices: int = 10,
@@ -55,6 +56,7 @@ def run_benchmark(
         iterations=sa_iterations,
         initial_temperature=sa_initial_temperature,
         cooling_rate=sa_cooling_rate,
+        min_temperature=sa_min_temperature,
         seed=seed,
     )
     sa_time = (time.perf_counter() - start) * 1000

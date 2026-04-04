@@ -34,6 +34,7 @@ export type RunPayload = {
   sa_iterations: number;
   sa_initial_temperature: number;
   sa_cooling_rate: number;
+  sa_min_temperature: number;
   bb_timeout_seconds: number;
   seed: number;
   graph_preview_max_vertices: number;
@@ -43,6 +44,7 @@ export type Defaults = {
   sa_iterations: number;
   sa_initial_temperature: number;
   sa_cooling_rate: number;
+  sa_min_temperature: number;
   bb_timeout_seconds: number;
   seed: number;
   graph_preview_max_vertices: number;

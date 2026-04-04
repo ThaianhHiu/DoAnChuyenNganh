@@ -35,6 +35,7 @@ def _anneal_for_k(
     iterations: int,
     initial_temperature: float,
     cooling_rate: float,
+    min_temperature: float,
     rng: random.Random,
 ) -> tuple[list[int], int]:
     n = graph.num_vertices
@@ -45,7 +46,7 @@ def _anneal_for_k(
     temperature = initial_temperature
 
     for _ in range(iterations):
-        if best_conflicts == 0:
+        if best_conflicts == 0 or temperature < min_temperature:
             break
 
         u = rng.randrange(n)
@@ -74,7 +75,8 @@ def simulated_annealing_coloring(
     graph: Graph,
     iterations: int = 40000,
     initial_temperature: float = 10.0,
-    cooling_rate: float = 0.966,
+    cooling_rate: float = 0.96,
+    min_temperature: float = 0.01,
     seed: int = 42,
 ) -> dict:
     rng = random.Random(seed)
@@ -93,6 +95,7 @@ def simulated_annealing_coloring(
             iterations=iterations,
             initial_temperature=initial_temperature,
             cooling_rate=cooling_rate,
+            min_temperature=min_temperature,
             rng=rng,
         )
 
