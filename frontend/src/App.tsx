@@ -258,7 +258,6 @@ export default function App() {
   const [saCoolingRate, setSaCoolingRate] = useState<number>(0.96);
   const [saMinTemp, setSaMinTemp] = useState<number>(0.01);
   const [bbTimeout, setBbTimeout] = useState<number>(20);
-  const [seed, setSeed] = useState<number>(42);
   const [graphPreviewThreshold, setGraphPreviewThreshold] = useState<number>(10);
 
   const [results, setResults] = useState<AlgoResult[]>([]);
@@ -282,7 +281,6 @@ export default function App() {
         setSaCoolingRate(defaults.sa_cooling_rate);
         setSaMinTemp(defaults.sa_min_temperature);
         setBbTimeout(defaults.bb_timeout_seconds);
-        setSeed(defaults.seed);
         setGraphPreviewThreshold(defaults.graph_preview_max_vertices);
       } catch {
         // Keep hardcoded defaults if API fails
@@ -348,7 +346,6 @@ export default function App() {
         sa_cooling_rate: saCoolingRate,
         sa_min_temperature: saMinTemp,
         bb_timeout_seconds: bbTimeout,
-        seed,
         graph_preview_max_vertices: graphPreviewThreshold,
       });
 
@@ -481,11 +478,6 @@ export default function App() {
               value={bbTimeout}
               onChange={(e) => setBbTimeout(Number(e.target.value))}
             />
-          </label>
-
-          <label className="input-field">
-            Seed:
-            <input type="number" value={seed} onChange={(e) => setSeed(Number(e.target.value))} />
           </label>
 
           <label className="input-field">
